@@ -37,7 +37,7 @@ export default function ProjectItem({data}){
                 />
             </div>
 
-            <div className="p-4 flex flex-col  ">
+            <div className="p-4 flex flex-col bg-slate-100 dark:bg-slate-700">
                 <h1 className="text-2xl font-bold">{title}</h1>
                 <h3 className="mt-4 text-xl">{description}</h3>
                 <a href={github}>깃허브 바로가기</a>
@@ -46,7 +46,6 @@ export default function ProjectItem({data}){
                 ) : (
                     <a a href="#" className="pointer-events-none opacity-50 cursor-not-allowed line-through">유튜브 시연영상 바로가기</a>
                 )}
-                
                 <p className="my-1 dark:text-slate-300">
                     작업기간 {`${startDateString} ~ ${endDateString} (${calculatedPeriod(startDateString, endDateString)}일)`}
                 </p>

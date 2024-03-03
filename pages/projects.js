@@ -9,8 +9,6 @@ export default function Projects({projects}){
     return (
         <Layout>
             <div className="flex flex-col items-center justify-center min-h-screen px-5 py-24 mb-10 px-6">
-
-            
                 <h1 className="text-4xl font-bold sm:text-6xl">
                     총 프로젝트 : 
                     <b className="pl-4 text-blue-500">{projects.results.length}</b>
