@@ -4,9 +4,9 @@ export default function ProjectItem({data}){
 
     const title = data.properties.이름.title[0].text.content
     const github = data.properties.Github.url;
-    const youtube = data.properties.YouTube.url;
+    const youtube = data.properties.YouTube.rich_text[0]? data.properties.YouTube.rich_text[0].text.content : "";
     const description = data.properties.Description.rich_text[0].text.content;
-    const imgSrc = data.cover.external.url;
+    const imgSrc = data.cover.file.url;
     const tags = data.properties.태그.multi_select;
     const startDateString = data.properties.WorkPeriod.date.start
     const endDateString = data.properties.WorkPeriod.date.end
@@ -26,24 +26,28 @@ export default function ProjectItem({data}){
 
     return (
         <div className="project-card">
-            
-            <Image 
-                className="rounded-t-xl"
-                src={imgSrc}
-                alt="cover image"
-                width = "100"
-                height = "50"
-                layout="responsive"
-                objectFit="cover"
-                quality={100}
-            />
+            <div className="w-full h-64 overflow-hidden rounded-t-xl relative">
+                <Image 
+                    className="rounded-t-xl object-cover"
+                    src={imgSrc}
+                    alt="cover image"
+                    layout="fill"
+                    objectFit="cover" 
+                    quality={100}
+                />
+            </div>
 
-            <div className="p-4 flex flex-col ">
+            <div className="p-4 flex flex-col  ">
                 <h1 className="text-2xl font-bold">{title}</h1>
                 <h3 className="mt-4 text-xl">{description}</h3>
                 <a href={github}>깃허브 바로가기</a>
-                <a href={youtube}>유튜브 시연영상 바로가기</a>
-                <p className="my-1">
+                {youtube ? (
+                    <a href={youtube}>유튜브 시연영상 바로가기</a>
+                ) : (
+                    <a a href="#" className="pointer-events-none opacity-50 cursor-not-allowed line-through">유튜브 시연영상 바로가기</a>
+                )}
+                
+                <p className="my-1 dark:text-slate-300">
                     작업기간 {`${startDateString} ~ ${endDateString} (${calculatedPeriod(startDateString, endDateString)}일)`}
                 </p>
 

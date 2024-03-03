@@ -4,11 +4,11 @@ import { DATABASE_ID, TOKEN } from "@/config";
 
 export default function Projects({projects}){
 
-    console.log(projects);
+    // console.log(JSON.stringify(projects));
 
     return (
         <Layout>
-            <div className="flex flex-col items-center justify-center min-h-screen px-5 py-24 mb-10">
+            <div className="flex flex-col items-center justify-center min-h-screen px-5 py-24 mb-10 px-6">
 
             
                 <h1 className="text-4xl font-bold sm:text-6xl">
@@ -16,7 +16,7 @@ export default function Projects({projects}){
                     <b className="pl-4 text-blue-500">{projects.results.length}</b>
                 </h1>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 py-10 m-6 gap-8 sm:w-full">
+                <div className="grid grid-cols-1 md:grid-cols-2 py-10 m-6 gap-8">
                     {projects.results.map((project) => (
                         <ProjectItem key={project.id} data={project} />
                     ))}
@@ -39,8 +39,8 @@ export async function getStaticProps(){
         body : JSON.stringify({
             sorts : [
                 {
-                    "property" : "이름",
-                    "direction" : "ascending"
+                    "property" : "WorkPeriod",
+                    "direction" : "descending"
                 }
             ],
             page_size : 100
@@ -49,14 +49,6 @@ export async function getStaticProps(){
 
     const res = await fetch(`https://api.notion.com/v1/databases/${DATABASE_ID}/query`, options)
     const projects = await res.json();
-
-    // console.log(JSON.stringify(projects));
-
-    // const projectNames = projects.results.map((project) => (
-    //     project.properties.이름.title[0].text.content
-    // ))
-
-    // console.log(projectNames);
     
     return {
         props : {projects},
