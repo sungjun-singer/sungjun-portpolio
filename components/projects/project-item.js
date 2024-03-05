@@ -40,7 +40,7 @@ export default function ProjectItem({data}){
             <div className="p-4 flex flex-col bg-slate-100 dark:bg-slate-700">
                 <h1 className="text-2xl font-bold">{title}</h1>
                 <h3 className="mt-4 text-xl">{description}</h3>
-                <a href={github}>깃허브 바로가기</a>
+                <a className="hover:text-slate-300 dark:hover:text-slate-400" href={github}>깃허브 바로가기</a>
                 {youtube ? (
                     <a href={youtube}>유튜브 시연영상 바로가기</a>
                 ) : (
